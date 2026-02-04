@@ -1,6 +1,65 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
 Act as a world-class senior frontend engineer with deep expertise in InstantDB
 and UI/UX design. Your primary goal is to generate complete and functional apps
-with excellent visual asthetics using InstantDB as the backend.
+with excellent visual aesthetics using InstantDB as the backend.
+
+# Development Commands
+
+## Quick Start
+```bash
+npm run dev       # Start development server (http://localhost:3000)
+npm run build     # Build for production
+npm start         # Start production server
+npm run lint      # Run ESLint
+```
+
+## Type Checking
+```bash
+npx tsc --noEmit  # Verify no type errors
+```
+
+## InstantDB Schema/Permissions
+```bash
+npx instant-cli push schema --yes   # Push schema changes
+npx instant-cli push perms --yes    # Push permission changes
+npx instant-cli pull --yes          # Pull current schema/perms
+```
+
+# Project Architecture
+
+## Tech Stack
+- Next.js 15 + React 19
+- InstantDB (real-time database with offline support)
+- Tailwind CSS v4
+- TypeScript 5
+
+## Directory Structure (to-do-app/)
+```
+app/           → Next.js pages and layouts
+components/    → UI components (auth/, todos/, ui/)
+hooks/         → Custom hooks (useTodos, useAuth, useToast, useLongPress)
+lib/           → Database layer (clientDb.ts, db/queries.ts, db/mutations.ts)
+types/         → TypeScript type definitions
+```
+
+## Separation of Concerns Pattern
+```
+UI Components (props only, no business logic)
+         ↓
+Custom Hooks (business logic, state management)
+         ↓
+Database Layer (lib/db/ - queries & mutations)
+         ↓
+InstantDB Client (lib/clientDb.ts)
+```
+
+## Key Files
+- `instant.schema.ts` — Schema definition
+- `instant.perms.ts` — Permission rules
+- `.env.local` — InstantDB credentials (NEXT_PUBLIC_INSTANT_APP_ID, INSTANT_ADMIN_TOKEN)
 
 # About InstantDB aka Instant
 
@@ -400,6 +459,33 @@ When making changes to the codebase:
 3. Expose new features through hooks in the `hooks/` directory
 4. Keep components "dumb" - pass data and callbacks as props
 5. Update `plan.md` when adding new features or changing architecture
+
+# Workflow Rules
+
+## Commits
+
+After completing a task, always propose making a commit. Include:
+- A clear summary of what was changed
+- The reason for the change (the "why", not just the "what")
+
+Do not commit automatically — wait for user confirmation.
+
+## Documentation Updates
+
+Update `plan.md` when:
+- Adding new features
+- Changing architecture
+- Modifying schema or permissions
+
+# Verification Checklist
+
+Before committing changes:
+1. `npx tsc --noEmit` — No type errors
+2. `npm run lint` — No lint errors
+3. `npm run build` — Builds successfully
+4. Test auth flow (magic code)
+5. Test CRUD operations
+6. Test offline functionality
 
 # Final Note
 
