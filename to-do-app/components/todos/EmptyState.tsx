@@ -3,13 +3,14 @@
 export function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800">
+      <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-neu-bg shadow-neu">
         <svg
-          className="h-8 w-8 text-zinc-400 dark:text-zinc-500"
+          className="h-8 w-8 text-text-muted"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={1.5}
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -18,10 +19,10 @@ export function EmptyState() {
           />
         </svg>
       </div>
-      <h3 className="text-lg font-medium text-zinc-900 dark:text-zinc-100">
+      <h3 className="text-lg font-medium text-text-primary">
         No tasks yet
       </h3>
-      <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
+      <p className="mt-1 text-sm text-text-secondary">
         Add your first task to get started
       </p>
     </div>

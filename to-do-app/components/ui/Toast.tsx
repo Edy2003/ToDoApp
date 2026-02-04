@@ -9,7 +9,12 @@ interface ToastComponentProps {
 
 export function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
   return (
-    <div className="animate-slide-up flex items-center gap-3 rounded-lg bg-zinc-900 px-4 py-3 text-sm text-white shadow-lg dark:bg-zinc-100 dark:text-zinc-900">
+    <div
+      className="animate-slide-up flex items-center gap-3 rounded-[16px] bg-neu-bg px-4 py-3 text-sm text-text-primary shadow-neu"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
       <span>{toast.message}</span>
       {toast.action && (
         <button
@@ -17,7 +22,7 @@ export function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
             toast.action?.onClick();
             onDismiss();
           }}
-          className="font-medium text-blue-400 hover:text-blue-300 dark:text-blue-600 dark:hover:text-blue-700"
+          className="font-medium text-accent-text hover:text-accent-hover transition-colors duration-200"
         >
           {toast.action.label}
         </button>

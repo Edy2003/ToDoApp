@@ -47,7 +47,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
     return (
       <button
         onClick={() => setIsExpanded(true)}
-        className="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-zinc-900 text-white shadow-lg transition-transform hover:scale-105 hover:bg-zinc-800 active:scale-95 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200 sm:bottom-8 sm:right-8"
+        className="fixed bottom-6 right-6 flex h-14 w-14 items-center justify-center rounded-full bg-accent text-white shadow-neu transition-all duration-200 hover:bg-accent-hover hover:shadow-neu-sm active:shadow-neu-pressed sm:bottom-8 sm:right-8"
         aria-label="Add new task"
       >
         <svg
@@ -56,6 +56,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
           viewBox="0 0 24 24"
           stroke="currentColor"
           strokeWidth={2}
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"
@@ -68,7 +69,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 border-t border-zinc-200 bg-white p-4 dark:border-zinc-800 dark:bg-zinc-900 sm:bottom-6 sm:left-1/2 sm:right-auto sm:w-full sm:max-w-lg sm:-translate-x-1/2 sm:rounded-lg sm:border sm:shadow-lg">
+    <div className="fixed bottom-0 left-0 right-0 bg-neu-bg p-4 shadow-neu sm:bottom-6 sm:left-1/2 sm:right-auto sm:w-full sm:max-w-lg sm:-translate-x-1/2 sm:rounded-[24px]">
       <div className="flex items-center gap-3">
         <input
           ref={inputRef}
@@ -79,12 +80,12 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
           onBlur={handleBlur}
           placeholder="What needs to be done?"
           maxLength={100}
-          className="flex-1 rounded-lg border border-zinc-300 bg-white px-4 py-3 text-zinc-900 placeholder-zinc-400 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500"
+          className="flex-1 rounded-[16px] bg-neu-bg px-4 py-3 text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
         />
         <button
           onClick={handleSubmit}
           disabled={!value.trim()}
-          className="flex h-12 w-12 items-center justify-center rounded-lg bg-zinc-900 text-white transition-colors hover:bg-zinc-800 disabled:cursor-not-allowed disabled:opacity-50 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-200"
+          className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-accent text-white shadow-neu-sm transition-all duration-200 hover:bg-accent-hover hover:shadow-neu active:shadow-neu-pressed disabled:cursor-not-allowed disabled:opacity-50 disabled:shadow-neu-inset"
           aria-label="Add task"
         >
           <svg
@@ -93,6 +94,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -106,7 +108,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
             setValue("");
             setIsExpanded(false);
           }}
-          className="flex h-12 w-12 items-center justify-center rounded-lg text-zinc-500 transition-colors hover:bg-zinc-100 hover:text-zinc-700 dark:hover:bg-zinc-800 dark:hover:text-zinc-300"
+          className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-neu-bg text-text-secondary shadow-neu-sm transition-all duration-200 hover:shadow-neu hover:text-text-primary active:shadow-neu-pressed"
           aria-label="Cancel"
         >
           <svg
@@ -115,6 +117,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -124,7 +127,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
           </svg>
         </button>
       </div>
-      <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-500">
+      <p className="mt-2 text-xs text-text-muted">
         Press Enter to add, Escape to cancel
       </p>
     </div>

@@ -1,28 +1,82 @@
 @import "tailwindcss";
 
+/* Neumorphism Design System */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Background */
+  --bg-main: #E4E9F2;
+
+  /* Shadows */
+  --shadow-light: #FFFFFF;
+  --shadow-dark: #A3B1C6;
+
+  /* Text */
+  --text-primary: #2D3748;
+  --text-secondary: #718096;
+  --text-muted: #A0AEC0;
+
+  /* Accent */
+  --accent: #67B8DE;
+  --accent-text: #1E7BA5;
+  --accent-hover: #4DA8D4;
+  --accent-light: #A8D8EA;
+
+  /* States - decorative (icons, backgrounds) */
+  --success: #6BCB77;
+  --danger: #FF6B6B;
+  --warning: #FFD93D;
+
+  /* States - text safe (WCAG AA compliant) */
+  --success-text: #1D7A3E;
+  --danger-text: #C53030;
+  --warning-text: #8B6914;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  /* Colors */
+  --color-neu-bg: #E4E9F2;
+  --color-neu-light: #FFFFFF;
+  --color-neu-dark: #A3B1C6;
+  --color-accent: #67B8DE;
+  --color-accent-text: #1E7BA5;
+  --color-accent-hover: #4DA8D4;
+  --color-accent-light: #A8D8EA;
+  --color-success: #6BCB77;
+  --color-success-text: #1D7A3E;
+  --color-danger: #FF6B6B;
+  --color-danger-text: #C53030;
+  --color-warning: #FFD93D;
+  --color-warning-text: #8B6914;
+  --color-text-primary: #2D3748;
+  --color-text-secondary: #718096;
+  --color-text-muted: #A0AEC0;
+
+  /* Shadows */
+  --shadow-neu: 8px 8px 16px #A3B1C6, -8px -8px 16px #FFFFFF;
+  --shadow-neu-sm: 4px 4px 8px #A3B1C6, -4px -4px 8px #FFFFFF;
+  --shadow-neu-inset: inset 4px 4px 8px #A3B1C6, inset -4px -4px 8px #FFFFFF;
+  --shadow-neu-pressed: inset 6px 6px 12px #A3B1C6, inset -6px -6px 12px #FFFFFF;
+
+  /* Border Radius */
+  --radius-neu: 16px;
+  --radius-neu-lg: 24px;
+
+  /* Z-Index Scale */
+  --z-dropdown: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+
+  /* Animations */
+  --animate-slide-up: slide-up 0.3s ease-out;
+  --animate-neu-press: neu-press 0.3s ease-out forwards;
+  --animate-fade-out: fade-out 0.2s ease-out forwards;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
+/* Base styles */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 /* Checkbox fill animation */
@@ -46,18 +100,51 @@ body {
 
 /* Toast slide up animation */
 @keyframes slide-up {
-  0% {
-    transform: translateY(100%);
+  from {
     opacity: 0;
+    transform: translateY(20px);
   }
-  100% {
-    transform: translateY(0);
+  to {
     opacity: 1;
+    transform: translateY(0);
   }
 }
 
 .animate-slide-up {
-  animation: slide-up 200ms ease-out;
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Checkbox completion animation */
+@keyframes neu-press {
+  0% {
+    box-shadow: 4px 4px 8px #A3B1C6, -4px -4px 8px #FFFFFF;
+  }
+  50% {
+    box-shadow: inset 6px 6px 12px #A3B1C6, inset -6px -6px 12px #FFFFFF;
+  }
+  100% {
+    box-shadow: inset 6px 6px 12px #A3B1C6, inset -6px -6px 12px #FFFFFF;
+  }
+}
+
+.animate-neu-press {
+  animation: neu-press 0.3s ease-out forwards;
+}
+
+/* Fade out for deleted items */
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+.animate-fade-out {
+  animation: fade-out 0.2s ease-out forwards;
 }
 
 /* Smooth transitions for todo items */
@@ -65,9 +152,35 @@ body {
   transition: transform 300ms ease-out, opacity 200ms ease-in;
 }
 
+/* Neumorphism interactive transition */
+.neu-interactive {
+  transition: box-shadow 0.2s ease-in-out,
+              background-color 0.2s ease-in-out,
+              transform 0.2s ease-in-out;
+}
+
 /* Focus visible outline for accessibility */
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid #3b82f6;
-  outline-offset: 2px;
+  outline: none;
+  box-shadow: 0 0 0 2px var(--bg-main), 0 0 0 4px var(--accent-text);
+}
+
+/* Custom scrollbar for neumorphism */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--shadow-dark);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #8A9BB0;
 }

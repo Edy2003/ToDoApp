@@ -21,8 +21,8 @@ export function TodoList({
 }: TodoListProps) {
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center py-16">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-900 dark:border-zinc-600 dark:border-t-zinc-100" />
+      <div className="flex items-center justify-center py-16" role="status" aria-busy="true" aria-label="Loading tasks...">
+        <div className="h-10 w-10 rounded-full bg-neu-bg shadow-neu animate-pulse" />
       </div>
     );
   }
@@ -36,7 +36,7 @@ export function TodoList({
   const completedTodos = todos.filter((t) => t.completed);
 
   return (
-    <div className="space-y-1 pb-24">
+    <div className="space-y-3 pb-24">
       {incompleteTodos.map((todo) => (
         <TodoItem
           key={todo.id}
@@ -49,7 +49,7 @@ export function TodoList({
 
       {completedTodos.length > 0 && incompleteTodos.length > 0 && (
         <div className="py-4">
-          <p className="px-4 text-xs font-medium uppercase tracking-wide text-zinc-400 dark:text-zinc-500">
+          <p className="px-4 text-xs font-medium uppercase tracking-wide text-text-muted">
             Completed ({completedTodos.length})
           </p>
         </div>

@@ -52,21 +52,23 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
 
   return (
     <div
-      className={`group relative flex items-center gap-3 rounded-lg px-4 py-3 transition-all duration-200 ${
+      className={`group relative flex items-center gap-4 rounded-[16px] p-4 transition-all duration-200 bg-neu-bg ${
         todo.completed
-          ? "bg-zinc-50 dark:bg-zinc-900/50"
-          : "bg-white hover:bg-zinc-50 dark:bg-zinc-900 dark:hover:bg-zinc-800/50"
+          ? "shadow-neu-inset"
+          : "shadow-neu hover:shadow-neu-sm"
       }`}
     >
       {/* Checkbox */}
       <button
         onClick={onToggle}
-        className={`relative flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300 ${
+        className={`relative flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full transition-all duration-300 ${
           todo.completed
-            ? "border-emerald-500 bg-emerald-500"
-            : "border-zinc-300 hover:border-zinc-400 dark:border-zinc-600 dark:hover:border-zinc-500"
+            ? "shadow-neu-pressed bg-success"
+            : "shadow-neu-sm bg-neu-bg hover:shadow-neu"
         }`}
         aria-label={todo.completed ? "Mark as incomplete" : "Mark as complete"}
+        role="checkbox"
+        aria-checked={todo.completed}
       >
         {todo.completed && (
           <svg
@@ -75,6 +77,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={3}
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -96,7 +99,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
             onKeyDown={handleKeyDown}
             onBlur={handleSave}
             maxLength={100}
-            className="flex-1 rounded border border-zinc-300 bg-white px-2 py-1 text-zinc-900 focus:border-zinc-500 focus:outline-none focus:ring-1 focus:ring-zinc-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100"
+            className="flex-1 rounded-[16px] bg-neu-bg px-4 py-2 text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
           />
         </div>
       ) : (
@@ -105,8 +108,8 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
           {...longPressProps}
           className={`flex-1 cursor-pointer select-none transition-all duration-300 ${
             todo.completed
-              ? "text-zinc-400 line-through dark:text-zinc-500"
-              : "text-zinc-900 dark:text-zinc-100"
+              ? "text-text-muted line-through"
+              : "text-text-primary"
           }`}
         >
           {todo.title}
@@ -117,8 +120,8 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
       {!isEditing && !showDeleteConfirm && (
         <button
           onClick={() => setShowDeleteConfirm(true)}
-          className="flex h-8 w-8 items-center justify-center rounded-md text-zinc-400 opacity-0 transition-opacity hover:bg-zinc-100 hover:text-zinc-600 group-hover:opacity-100 dark:hover:bg-zinc-700 dark:hover:text-zinc-300 sm:opacity-100 sm:group-hover:opacity-100"
-          aria-label="Delete task"
+          className="flex h-8 w-8 items-center justify-center rounded-full text-text-secondary opacity-0 transition-all duration-200 shadow-neu-sm hover:shadow-neu hover:text-danger-text group-hover:opacity-100 sm:opacity-100 sm:group-hover:opacity-100 active:shadow-neu-pressed"
+          aria-label={`Delete task: ${todo.title}`}
         >
           <svg
             className="h-4 w-4"
@@ -126,6 +129,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
             viewBox="0 0 24 24"
             stroke="currentColor"
             strokeWidth={2}
+            aria-hidden="true"
           >
             <path
               strokeLinecap="round"
@@ -144,13 +148,13 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
               onDelete();
               setShowDeleteConfirm(false);
             }}
-            className="rounded-md bg-red-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-red-600"
+            className="rounded-[12px] bg-danger px-3 py-1.5 text-xs font-medium text-white shadow-neu-sm hover:shadow-neu active:shadow-neu-pressed transition-all duration-200"
           >
             Delete
           </button>
           <button
             onClick={() => setShowDeleteConfirm(false)}
-            className="rounded-md px-3 py-1.5 text-xs font-medium text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-700"
+            className="rounded-[12px] bg-neu-bg px-3 py-1.5 text-xs font-medium text-text-secondary shadow-neu-sm hover:shadow-neu active:shadow-neu-pressed transition-all duration-200"
           >
             Cancel
           </button>

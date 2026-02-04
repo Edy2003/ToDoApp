@@ -36,8 +36,8 @@ function AppContent() {
   // Loading state
   if (authLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center">
-        <div className="h-8 w-8 animate-spin rounded-full border-2 border-zinc-300 border-t-zinc-900 dark:border-zinc-600 dark:border-t-zinc-100" />
+      <div className="flex min-h-screen items-center justify-center bg-neu-bg" role="status" aria-busy="true" aria-label="Loading...">
+        <div className="h-10 w-10 rounded-full bg-neu-bg shadow-neu animate-pulse" />
       </div>
     );
   }
@@ -60,7 +60,7 @@ function AppContent() {
 
   // Authenticated - show todos
   return (
-    <div className="flex min-h-screen flex-col bg-zinc-50 dark:bg-black">
+    <div className="flex min-h-screen flex-col bg-neu-bg">
       <Header userEmail={user.email ?? undefined} onSignOut={signOut} />
 
       <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-6 sm:px-6">
