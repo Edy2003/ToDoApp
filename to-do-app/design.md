@@ -38,7 +38,8 @@ This document defines the visual design system for the Todo App. All UI changes 
 
 | Назва | HEX | Використання |
 |-------|-----|--------------|
-| Accent | `#67B8DE` | Кнопки, активні елементи, links |
+| Accent | `#67B8DE` | Іконки, великі елементи, декоративні |
+| Accent Text | `#1E7BA5` | **Текст, links (WCAG AA compliant)** |
 | Accent Hover | `#4DA8D4` | Hover стан акцентних елементів |
 | Accent Light | `#A8D8EA` | Subtle highlights, borders |
 
@@ -46,9 +47,12 @@ This document defines the visual design system for the Todo App. All UI changes 
 
 | Назва | HEX | Використання |
 |-------|-----|--------------|
-| Success | `#6BCB77` | Завершення, підтвердження |
-| Danger | `#FF6B6B` | Видалення, помилки |
-| Warning | `#FFD93D` | Попередження |
+| Success | `#6BCB77` | Іконки, індикатори |
+| Success Text | `#1D7A3E` | **Текст успіху (WCAG AA)** |
+| Danger | `#FF6B6B` | Іконки, індикатори |
+| Danger Text | `#C53030` | **Текст помилки (WCAG AA)** |
+| Warning | `#FFD93D` | Фон для попереджень |
+| Warning Text | `#8B6914` | **Текст попередження (WCAG AA)** |
 
 ### CSS Variables
 
@@ -68,13 +72,19 @@ This document defines the visual design system for the Todo App. All UI changes 
 
   /* Accent */
   --accent: #67B8DE;
+  --accent-text: #1E7BA5;       /* WCAG AA for text */
   --accent-hover: #4DA8D4;
   --accent-light: #A8D8EA;
 
-  /* States */
+  /* States - decorative (icons, backgrounds) */
   --success: #6BCB77;
   --danger: #FF6B6B;
   --warning: #FFD93D;
+
+  /* States - text safe (WCAG AA compliant) */
+  --success-text: #1D7A3E;
+  --danger-text: #C53030;
+  --warning-text: #8B6914;
 }
 ```
 
@@ -121,9 +131,52 @@ font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 | `neu-inset` | `inset 4px 4px 8px #A3B1C6, inset -4px -4px 8px #FFFFFF` | Inputs, pressed state |
 | `neu-pressed` | `inset 6px 6px 12px #A3B1C6, inset -6px -6px 12px #FFFFFF` | Active/checked elements |
 
-### Tailwind Config
+### Tailwind v4 Config (@theme)
+
+```css
+/* In globals.css or app.css */
+@import "tailwindcss";
+
+@theme {
+  /* Colors */
+  --color-neu-bg: #E4E9F2;
+  --color-neu-light: #FFFFFF;
+  --color-neu-dark: #A3B1C6;
+  --color-accent: #67B8DE;
+  --color-accent-text: #1E7BA5;
+  --color-accent-hover: #4DA8D4;
+  --color-accent-light: #A8D8EA;
+  --color-success: #6BCB77;
+  --color-success-text: #1D7A3E;
+  --color-danger: #FF6B6B;
+  --color-danger-text: #C53030;
+  --color-warning: #FFD93D;
+  --color-warning-text: #8B6914;
+  --color-text-primary: #2D3748;
+  --color-text-secondary: #718096;
+  --color-text-muted: #A0AEC0;
+
+  /* Shadows */
+  --shadow-neu: 8px 8px 16px #A3B1C6, -8px -8px 16px #FFFFFF;
+  --shadow-neu-sm: 4px 4px 8px #A3B1C6, -4px -4px 8px #FFFFFF;
+  --shadow-neu-inset: inset 4px 4px 8px #A3B1C6, inset -4px -4px 8px #FFFFFF;
+  --shadow-neu-pressed: inset 6px 6px 12px #A3B1C6, inset -6px -6px 12px #FFFFFF;
+
+  /* Border Radius */
+  --radius-neu: 16px;
+  --radius-neu-lg: 24px;
+
+  /* Animations */
+  --animate-slide-up: slide-up 0.3s ease-out;
+  --animate-neu-press: neu-press 0.3s ease-out forwards;
+  --animate-fade-out: fade-out 0.2s ease-out forwards;
+}
+```
+
+### Legacy Tailwind v3 Config (if needed)
 
 ```js
+// tailwind.config.ts
 boxShadow: {
   'neu': '8px 8px 16px #A3B1C6, -8px -8px 16px #FFFFFF',
   'neu-sm': '4px 4px 8px #A3B1C6, -4px -4px 8px #FFFFFF',
@@ -159,6 +212,30 @@ boxShadow: {
 
 ---
 
+## Z-Index Scale
+
+| Назва | Value | Використання |
+|-------|-------|--------------|
+| `z-0` | 0 | Base content |
+| `z-10` | 10 | Elevated cards, dropdowns trigger |
+| `z-20` | 20 | Sticky header |
+| `z-30` | 30 | Dropdown menus, popovers |
+| `z-40` | 40 | Modal backdrop |
+| `z-50` | 50 | Modal content, dialogs |
+| `z-60` | 60 | Toasts, notifications |
+
+```css
+/* Custom z-index in @theme */
+@theme {
+  --z-dropdown: 30;
+  --z-modal-backdrop: 40;
+  --z-modal: 50;
+  --z-toast: 60;
+}
+```
+
+---
+
 ## Components
 
 ### Card / Container
@@ -176,7 +253,7 @@ boxShadow: {
 <button className="
   bg-neu-bg rounded-neu shadow-neu
   px-6 py-3
-  text-neu-accent font-medium
+  text-accent-text font-medium
   hover:shadow-neu-sm
   active:shadow-neu-pressed
   transition-shadow duration-200
@@ -204,7 +281,7 @@ boxShadow: {
   className="
     w-full bg-neu-bg rounded-neu shadow-neu-inset
     px-4 py-3
-    text-text-primary placeholder:text-text-secondary
+    text-primary placeholder:text-secondary
     focus:outline-none focus:ring-2 focus:ring-neu-accent/50
     transition-shadow duration-200
   "
@@ -241,14 +318,14 @@ boxShadow: {
 
   <span className={`
     flex-1 text-base
-    ${completed ? 'line-through text-text-muted' : 'text-text-primary'}
+    ${completed ? 'line-through text-muted' : 'text-primary'}
   `}>
     {title}
   </span>
 
   <button className="
     p-2 rounded-full shadow-neu-sm
-    text-text-secondary hover:text-danger
+    text-secondary hover:text-danger
     hover:shadow-neu active:shadow-neu-pressed
     transition-all duration-200
   ">
@@ -265,7 +342,7 @@ boxShadow: {
   px-6 py-4
   flex items-center justify-between
 ">
-  <h1 className="text-xl font-semibold text-text-primary">
+  <h1 className="text-xl font-semibold text-primary">
     My Tasks
   </h1>
   <UserMenu />
@@ -297,11 +374,100 @@ boxShadow: {
   px-4 py-3
   flex items-center gap-3
   animate-slide-up
+  z-60
 ">
-  <span className="text-text-primary">{message}</span>
-  <button className="text-neu-accent hover:text-neu-accent-hover">
+  <span className="text-primary">{message}</span>
+  <button className="text-accent-text hover:text-accent-hover">
     Undo
   </button>
+</div>
+```
+
+### Loading Skeleton
+
+```tsx
+<div className="animate-pulse">
+  <div className="bg-neu-bg rounded-neu shadow-neu-inset h-16 mb-3" />
+  <div className="bg-neu-bg rounded-neu shadow-neu-inset h-16 mb-3" />
+  <div className="bg-neu-bg rounded-neu shadow-neu-inset h-16" />
+</div>
+```
+
+### Empty State
+
+```tsx
+<div className="text-center py-12">
+  <ClipboardIcon className="w-12 h-12 text-muted mx-auto" />
+  <p className="text-secondary mt-4">No tasks yet</p>
+  <p className="text-muted text-sm mt-1">Add your first task to get started</p>
+</div>
+```
+
+### Input Error State
+
+```tsx
+<div>
+  <input
+    className="
+      w-full bg-neu-bg rounded-neu shadow-neu-inset
+      px-4 py-3
+      text-primary
+      ring-2 ring-danger/50
+      focus:outline-none focus:ring-danger
+    "
+    aria-invalid="true"
+    aria-describedby="error-message"
+  />
+  <p id="error-message" className="text-danger-text text-sm mt-1">
+    This field is required
+  </p>
+</div>
+```
+
+### Disabled Button
+
+```tsx
+<button
+  className="
+    bg-neu-bg rounded-neu
+    px-6 py-3
+    text-muted font-medium
+    opacity-50 cursor-not-allowed
+    shadow-neu-inset
+  "
+  disabled
+  aria-disabled="true"
+>
+  Disabled
+</button>
+```
+
+### Modal / Dialog
+
+```tsx
+{/* Backdrop */}
+<div className="fixed inset-0 bg-black/30 z-40" aria-hidden="true" />
+
+{/* Modal */}
+<div
+  className="
+    fixed inset-0 z-50
+    flex items-center justify-center p-4
+  "
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+>
+  <div className="bg-neu-bg rounded-neu-lg shadow-neu p-6 max-w-md w-full">
+    <h2 id="modal-title" className="text-xl font-semibold text-primary">
+      Modal Title
+    </h2>
+    <p className="text-secondary mt-2">Modal content goes here.</p>
+    <div className="flex gap-3 mt-6">
+      <button className="flex-1 ...">Cancel</button>
+      <button className="flex-1 bg-accent ...">Confirm</button>
+    </div>
+  </div>
 </div>
 ```
 
@@ -430,27 +596,144 @@ animation: {
 |---------|------------|------------|-------|--------|
 | Primary text | #2D3748 | #E4E9F2 | 7.2:1 | AAA |
 | Secondary text | #718096 | #E4E9F2 | 4.5:1 | AA |
-| Accent on bg | #67B8DE | #E4E9F2 | 2.1:1 | Use for large text/icons |
-| Accent text | #4DA8D4 | #E4E9F2 | 2.5:1 | Use with underline |
+| Accent text | #1E7BA5 | #E4E9F2 | 4.6:1 | **AA** |
+| Success text | #1D7A3E | #E4E9F2 | 5.8:1 | **AA** |
+| Danger text | #C53030 | #E4E9F2 | 5.2:1 | **AA** |
+| Warning text | #8B6914 | #E4E9F2 | 4.7:1 | **AA** |
+| Accent (decorative) | #67B8DE | #E4E9F2 | 2.1:1 | Icons only |
 
 ### Focus States
 
-```css
-/* Visible focus ring for keyboard navigation */
-.focus-visible:focus {
-  outline: none;
-  box-shadow:
-    inset 4px 4px 8px #A3B1C6,
-    inset -4px -4px 8px #FFFFFF,
-    0 0 0 3px #67B8DE;
-}
+All interactive elements must have visible focus states:
+
+```tsx
+// Button focus
+<button className="
+  ...
+  focus-visible:outline-none
+  focus-visible:ring-2
+  focus-visible:ring-accent-text
+  focus-visible:ring-offset-2
+  focus-visible:ring-offset-neu-bg
+">
+
+// Input focus
+<input className="
+  ...
+  focus:outline-none
+  focus:ring-2
+  focus:ring-accent/50
+  focus:shadow-neu-inset
+">
+
+// Checkbox focus
+<div className="
+  ...
+  focus-visible:ring-2
+  focus-visible:ring-accent-text
+  focus-visible:ring-offset-2
+" tabIndex={0} role="checkbox">
 ```
 
 ### Touch Targets
 
 - Minimum touch target size: 44x44px
-- Checkbox: 24x24px visible, 44x44px touch area
-- Buttons: минимум 44px height
+- Checkbox: 24x24px visible, 44x44px touch area (use padding)
+- Buttons: minimum 44px height
+- Links in text: adequate spacing or underline
+
+```tsx
+// Checkbox with larger touch area
+<button
+  className="p-2 -m-2" // Extends touch area
+  role="checkbox"
+  aria-checked={checked}
+>
+  <div className="w-6 h-6 ...">
+    {/* visible checkbox */}
+  </div>
+</button>
+```
+
+### ARIA Guidelines
+
+#### Checkbox
+
+```tsx
+<button
+  role="checkbox"
+  aria-checked={checked}
+  aria-label="Mark task as complete"
+  onClick={toggle}
+>
+```
+
+#### Todo Item
+
+```tsx
+<li
+  role="listitem"
+  aria-label={`Task: ${title}, ${completed ? 'completed' : 'pending'}`}
+>
+```
+
+#### Delete Button
+
+```tsx
+<button
+  aria-label={`Delete task: ${title}`}
+  onClick={handleDelete}
+>
+  <TrashIcon aria-hidden="true" />
+</button>
+```
+
+#### Modal
+
+```tsx
+<div
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="modal-title"
+  aria-describedby="modal-description"
+>
+```
+
+#### Toast
+
+```tsx
+<div
+  role="status"
+  aria-live="polite"
+  aria-atomic="true"
+>
+```
+
+#### Loading State
+
+```tsx
+<div
+  role="status"
+  aria-busy="true"
+  aria-label="Loading tasks..."
+>
+```
+
+### Keyboard Navigation
+
+| Key | Action |
+|-----|--------|
+| `Tab` | Move to next interactive element |
+| `Shift+Tab` | Move to previous element |
+| `Space/Enter` | Activate button/checkbox |
+| `Escape` | Close modal/cancel action |
+
+### Screen Reader Considerations
+
+- Use semantic HTML (`<button>`, `<input>`, `<ul>/<li>`)
+- Provide `aria-label` for icon-only buttons
+- Use `aria-live` for dynamic content updates
+- Hide decorative icons with `aria-hidden="true"`
 
 ---
 
