@@ -60,6 +60,21 @@ InstantDB Client (lib/clientDb.ts)
 - `instant.schema.ts` — Schema definition
 - `instant.perms.ts` — Permission rules
 - `.env.local` — InstantDB credentials (NEXT_PUBLIC_INSTANT_APP_ID, INSTANT_ADMIN_TOKEN)
+- `design.md` — Design system documentation
+
+# Design System
+
+При створенні або оновленні UI компонентів, завжди опирайся на `to-do-app/design.md`.
+
+Цей файл містить:
+- Кольорову палітру (Neumorphism style)
+- Типографіку
+- Стилі компонентів (shadow-neu, shadow-neu-inset, shadow-neu-pressed)
+- Layout guidelines
+- Анімації
+- Accessibility guidelines
+
+**Правило:** Перед зміною дизайну — спочатку переглянь та за потреби оновити `design.md`.
 
 # About InstantDB aka Instant
 
