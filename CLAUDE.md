@@ -61,6 +61,7 @@ InstantDB Client (lib/clientDb.ts)
 - `instant.perms.ts` — Permission rules
 - `.env.local` — InstantDB credentials (NEXT_PUBLIC_INSTANT_APP_ID, INSTANT_ADMIN_TOKEN)
 - `design.md` — Design system documentation
+- `frontenddev.md` — Frontend developer sub-agent definition
 
 # Design System
 
@@ -75,6 +76,23 @@ InstantDB Client (lib/clientDb.ts)
 - Accessibility guidelines
 
 **Правило:** Перед зміною дизайну — спочатку переглянь та за потреби оновити `design.md`.
+
+# Frontend Development
+
+При створенні фронтенду використовуй субагент `frontend-developer` (визначений у `frontenddev.md`).
+
+**Робочий процес:**
+1. Субагент читає `to-do-app/design.md` для розуміння дизайн-системи
+2. Застосовує кольори, тіні, анімації з design.md
+3. Створює компоненти згідно з архітектурою проєкту (separation of concerns)
+4. Дотримується accessibility guidelines
+
+**Коли використовувати frontend-developer:**
+- Створення нових UI компонентів
+- Рефакторинг існуючих компонентів
+- Виправлення responsive/mobile issues
+- Оптимізація продуктивності фронтенду
+- Імплементація анімацій та transitions
 
 # About InstantDB aka Instant
 
