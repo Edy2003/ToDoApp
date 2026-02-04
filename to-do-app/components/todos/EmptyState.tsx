@@ -5,7 +5,7 @@ export function EmptyState() {
     <div className="flex flex-col items-center justify-center py-16 text-center">
       <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-neu-bg shadow-neu">
         <svg
-          className="h-8 w-8 text-text-muted"
+          className="h-8 w-8 text-muted"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -19,10 +19,10 @@ export function EmptyState() {
           />
         </svg>
       </div>
-      <h3 className="text-lg font-medium text-text-primary">
+      <h3 className="text-lg font-medium text-primary">
         No tasks yet
       </h3>
-      <p className="mt-1 text-sm text-text-secondary">
+      <p className="mt-1 text-sm text-secondary">
         Add your first task to get started
       </p>
     </div>

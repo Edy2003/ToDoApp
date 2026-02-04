@@ -99,7 +99,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
             onKeyDown={handleKeyDown}
             onBlur={handleSave}
             maxLength={100}
-            className="flex-1 rounded-[16px] bg-neu-bg px-4 py-2 text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
+            className="flex-1 rounded-[16px] bg-neu-bg px-4 py-2 text-primary shadow-neu-inset placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
           />
         </div>
       ) : (
@@ -108,8 +108,8 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
           {...longPressProps}
           className={`flex-1 cursor-pointer select-none transition-all duration-300 ${
             todo.completed
-              ? "text-text-muted line-through"
-              : "text-text-primary"
+              ? "text-muted line-through"
+              : "text-primary"
           }`}
         >
           {todo.title}
@@ -120,7 +120,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
       {!isEditing && !showDeleteConfirm && (
         <button
           onClick={() => setShowDeleteConfirm(true)}
-          className="flex h-8 w-8 items-center justify-center rounded-full text-text-secondary opacity-0 transition-all duration-200 shadow-neu-sm hover:shadow-neu hover:text-danger-text group-hover:opacity-100 sm:opacity-100 sm:group-hover:opacity-100 active:shadow-neu-pressed"
+          className="flex h-8 w-8 items-center justify-center rounded-full text-secondary opacity-0 transition-all duration-200 shadow-neu-sm hover:shadow-neu hover:text-danger-text group-hover:opacity-100 sm:opacity-100 sm:group-hover:opacity-100 active:shadow-neu-pressed"
           aria-label={`Delete task: ${todo.title}`}
         >
           <svg
@@ -154,7 +154,7 @@ export function TodoItem({ todo, onToggle, onUpdate, onDelete }: TodoItemProps) 
           </button>
           <button
             onClick={() => setShowDeleteConfirm(false)}
-            className="rounded-[12px] bg-neu-bg px-3 py-1.5 text-xs font-medium text-text-secondary shadow-neu-sm hover:shadow-neu active:shadow-neu-pressed transition-all duration-200"
+            className="rounded-[12px] bg-neu-bg px-3 py-1.5 text-xs font-medium text-secondary shadow-neu-sm hover:shadow-neu active:shadow-neu-pressed transition-all duration-200"
           >
             Cancel
           </button>

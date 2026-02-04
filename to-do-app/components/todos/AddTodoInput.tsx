@@ -80,7 +80,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
           onBlur={handleBlur}
           placeholder="What needs to be done?"
           maxLength={100}
-          className="flex-1 rounded-[16px] bg-neu-bg px-4 py-3 text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
+          className="flex-1 rounded-[16px] bg-neu-bg px-4 py-3 text-primary shadow-neu-inset placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
         />
         <button
           onClick={handleSubmit}
@@ -108,7 +108,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
             setValue("");
             setIsExpanded(false);
           }}
-          className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-neu-bg text-text-secondary shadow-neu-sm transition-all duration-200 hover:shadow-neu hover:text-text-primary active:shadow-neu-pressed"
+          className="flex h-12 w-12 items-center justify-center rounded-[16px] bg-neu-bg text-secondary shadow-neu-sm transition-all duration-200 hover:shadow-neu hover:text-primary active:shadow-neu-pressed"
           aria-label="Cancel"
         >
           <svg
@@ -127,7 +127,7 @@ export function AddTodoInput({ onAdd }: AddTodoInputProps) {
           </svg>
         </button>
       </div>
-      <p className="mt-2 text-xs text-text-muted">
+      <p className="mt-2 text-xs text-muted">
         Press Enter to add, Escape to cancel
       </p>
     </div>

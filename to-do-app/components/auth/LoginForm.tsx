@@ -46,10 +46,10 @@ export function LoginForm({
       <div className="w-full max-w-sm">
         <div className="rounded-[24px] bg-neu-bg p-8 shadow-neu">
           <div className="mb-8 text-center">
-            <h1 className="text-2xl font-semibold tracking-tight text-text-primary">
+            <h1 className="text-2xl font-semibold tracking-tight text-primary">
               Welcome
             </h1>
-            <p className="mt-2 text-sm text-text-secondary">
+            <p className="mt-2 text-sm text-secondary">
               {authStep === "email"
                 ? "Sign in to manage your tasks"
                 : `Enter the code sent to ${email}`}
@@ -67,7 +67,7 @@ export function LoginForm({
               <div>
                 <label
                   htmlFor="email"
-                  className="block text-sm font-medium text-text-primary"
+                  className="block text-sm font-medium text-primary"
                 >
                   Email
                 </label>
@@ -79,7 +79,7 @@ export function LoginForm({
                   placeholder="you@example.com"
                   required
                   autoFocus
-                  className="mt-2 block w-full rounded-[16px] bg-neu-bg px-4 py-3 text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  className="mt-2 block w-full rounded-[16px] bg-neu-bg px-4 py-3 text-primary shadow-neu-inset placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
                 />
               </div>
               <button
@@ -95,7 +95,7 @@ export function LoginForm({
               <div>
                 <label
                   htmlFor="code"
-                  className="block text-sm font-medium text-text-primary"
+                  className="block text-sm font-medium text-primary"
                 >
                   Verification Code
                 </label>
@@ -109,7 +109,7 @@ export function LoginForm({
                   required
                   autoFocus
                   maxLength={6}
-                  className="mt-2 block w-full rounded-[16px] bg-neu-bg px-4 py-3 text-center text-lg tracking-widest text-text-primary shadow-neu-inset placeholder:text-text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
+                  className="mt-2 block w-full rounded-[16px] bg-neu-bg px-4 py-3 text-center text-lg tracking-widest text-primary shadow-neu-inset placeholder:text-secondary focus:outline-none focus:ring-2 focus:ring-accent/50"
                 />
               </div>
               <button
@@ -122,7 +122,7 @@ export function LoginForm({
               <button
                 type="button"
                 onClick={onBack}
-                className="w-full rounded-[16px] bg-neu-bg px-4 py-3 text-sm font-medium text-text-secondary shadow-neu-sm transition-all duration-200 hover:shadow-neu hover:text-text-primary active:shadow-neu-pressed"
+                className="w-full rounded-[16px] bg-neu-bg px-4 py-3 text-sm font-medium text-secondary shadow-neu-sm transition-all duration-200 hover:shadow-neu hover:text-primary active:shadow-neu-pressed"
               >
                 Back
               </button>

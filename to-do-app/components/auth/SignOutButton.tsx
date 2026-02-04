@@ -26,7 +26,7 @@ export function SignOutButton({ email, onSignOut }: SignOutButtonProps) {
     <div className="relative" ref={menuRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex h-9 w-9 items-center justify-center rounded-full bg-neu-bg text-sm font-medium text-text-primary shadow-neu-sm transition-all duration-200 hover:shadow-neu active:shadow-neu-pressed"
+        className="flex h-9 w-9 items-center justify-center rounded-full bg-neu-bg text-sm font-medium text-primary shadow-neu-sm transition-all duration-200 hover:shadow-neu active:shadow-neu-pressed"
         title={email}
         aria-label={`Account menu for ${email}`}
         aria-expanded={isOpen}
@@ -41,7 +41,7 @@ export function SignOutButton({ email, onSignOut }: SignOutButtonProps) {
           role="menu"
         >
           <div className="border-b border-neu-dark/20 px-4 py-2">
-            <p className="truncate text-sm text-text-secondary">
+            <p className="truncate text-sm text-secondary">
               {email}
             </p>
           </div>
@@ -50,7 +50,7 @@ export function SignOutButton({ email, onSignOut }: SignOutButtonProps) {
               setIsOpen(false);
               onSignOut();
             }}
-            className="w-full px-4 py-2 text-left text-sm text-text-primary transition-colors hover:bg-neu-dark/10"
+            className="w-full px-4 py-2 text-left text-sm text-primary transition-colors hover:bg-neu-dark/10"
             role="menuitem"
           >
             Sign out

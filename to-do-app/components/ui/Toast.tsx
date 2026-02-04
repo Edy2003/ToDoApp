@@ -10,7 +10,7 @@ interface ToastComponentProps {
 export function ToastComponent({ toast, onDismiss }: ToastComponentProps) {
   return (
     <div
-      className="animate-slide-up flex items-center gap-3 rounded-[16px] bg-neu-bg px-4 py-3 text-sm text-text-primary shadow-neu"
+      className="animate-slide-up flex items-center gap-3 rounded-[16px] bg-neu-bg px-4 py-3 text-sm text-primary shadow-neu"
       role="status"
       aria-live="polite"
       aria-atomic="true"

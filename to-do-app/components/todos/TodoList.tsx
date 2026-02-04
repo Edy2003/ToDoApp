@@ -49,7 +49,7 @@ export function TodoList({
 
       {completedTodos.length > 0 && incompleteTodos.length > 0 && (
         <div className="py-4">
-          <p className="px-4 text-xs font-medium uppercase tracking-wide text-text-muted">
+          <p className="px-4 text-xs font-medium uppercase tracking-wide text-muted">
             Completed ({completedTodos.length})
           </p>
         </div>
